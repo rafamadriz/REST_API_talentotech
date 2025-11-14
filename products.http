@@ -1,0 +1,20 @@
+@hostname=localhost
+@port=3000
+@host={{hostname}}:{{port}}
+
+### Get all products
+
+GET http://{{host}}/api/products
+
+### Get product by ID
+
+GET http://{{host}}/api/products/bbqK4ClOwsyoH9VrEPNJ
+
+### Create a new product
+
+POST http://{{host}}/api/products
+
+{
+    "name": "test",
+    "price": 36
+}
