@@ -20,7 +20,7 @@ export const getProductById = async (req, res) => {
         .catch(error => console.error(error.message))
 }
 
-export const createProduct = async (req, res) => {
+export const saveProduct = async (req, res) => {
     const name = req.body.name
     const price = req.body.price
     productsModel.saveProduct({name, price}).then(async docRef => {

@@ -5,16 +5,28 @@
 ### Get all products
 
 GET http://{{host}}/api/products
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzYzMTYyOTMyLCJleHAiOjE3NjMxNjY1MzJ9.h1_KHCGxaik-4uGN5rpgVSbzOn1Os63S-PBviL02wpo
 
 ### Get product by ID
 
 GET http://{{host}}/api/products/bbqK4ClOwsyoH9VrEPNJ
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzYzMTYyOTMyLCJleHAiOjE3NjMxNjY1MzJ9.h1_KHCGxaik-4uGN5rpgVSbzOn1Os63S-PBviL02wpo
 
 ### Create a new product
 
 POST http://{{host}}/api/products
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzYzMTYyOTMyLCJleHAiOjE3NjMxNjY1MzJ9.h1_KHCGxaik-4uGN5rpgVSbzOn1Os63S-PBviL02wpo
 
 {
     "name": "test",
     "price": 36
+}
+
+### Login
+
+POST http://{{host}}/auth/login
+
+{
+    "email": "user@example.com",
+    "password": "hahaha123"
 }

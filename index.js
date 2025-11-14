@@ -2,12 +2,16 @@ import express from 'express'
 import cors from 'cors'
 
 import productsRouter from './src/routes/products.routes.js'
+import authRouter from './src/routes/auth.routes.js'
+
+import { authentication } from './src/middleware/authentication.js'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use('/api', productsRouter)
+app.use('/auth', authRouter)
+app.use('/api', authentication, productsRouter)
 
 app.use((req, res) => {
     res.status(400).send('Recurso no encontrado')
