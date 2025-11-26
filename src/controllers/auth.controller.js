@@ -6,7 +6,7 @@ const defaultUser = {
     password: "hahaha123",
 }
 
-export const login= async (req, res) => {
+export const login = async (req, res) => {
     const { email, password } = req.body
     const user = { id: 1, email }
 

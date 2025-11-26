@@ -14,7 +14,7 @@ app.use('/auth', authRouter)
 app.use('/api', authentication, productsRouter)
 
 app.use((req, res) => {
-    res.status(400).send('Recurso no encontrado')
+    res.status(404).send('Recurso no encontrado')
 })
 
 const PORT = 3000
