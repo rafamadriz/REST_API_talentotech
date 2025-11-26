@@ -5,21 +5,36 @@
 ### Get all products
 
 GET http://{{host}}/api/products
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzYzMTYyOTMyLCJleHAiOjE3NjMxNjY1MzJ9.h1_KHCGxaik-4uGN5rpgVSbzOn1Os63S-PBviL02wpo
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InF4eE1oMTFVdXJUZGdlbzlOd0hxIiwiZW1haWwiOiJtZUB4LmNvbSIsImlhdCI6MTc2NDE2NDUwNSwiZXhwIjoxNzY0MTY4MTA1fQ.24r9qBs4HF1ukNsHPF-dNPiDyRiAl4btMC8Pt1OD1Ww
+
+### Get path doesn't exist
+
+GET http://{{host}}/api/productss
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InF4eE1oMTFVdXJUZGdlbzlOd0hxIiwiZW1haWwiOiJtZUB4LmNvbSIsImlhdCI6MTc2NDE2NDUwNSwiZXhwIjoxNzY0MTY4MTA1fQ.24r9qBs4HF1ukNsHPF-dNPiDyRiAl4btMC8Pt1OD1Ww
+
+### Get path without Authorization
+
+GET http://{{host}}/api/products
+
+### Delete product
+
+DELETE http://{{host}}/api/products/in7ydh5MxwClyLOKVD7i
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InF4eE1oMTFVdXJUZGdlbzlOd0hxIiwiZW1haWwiOiJtZUB4LmNvbSIsImlhdCI6MTc2NDE2NDUwNSwiZXhwIjoxNzY0MTY4MTA1fQ.24r9qBs4HF1ukNsHPF-dNPiDyRiAl4btMC8Pt1OD1Ww
 
 ### Get product by ID
 
-GET http://{{host}}/api/products/bbqK4ClOwsyoH9VrEPNJ
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzYzMTYyOTMyLCJleHAiOjE3NjMxNjY1MzJ9.h1_KHCGxaik-4uGN5rpgVSbzOn1Os63S-PBviL02wpo
+GET http://{{host}}/api/products/l8F0WCBBUc1Q7jxYmdu9
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InF4eE1oMTFVdXJUZGdlbzlOd0hxIiwiZW1haWwiOiJtZUB4LmNvbSIsImlhdCI6MTc2NDE2NDUwNSwiZXhwIjoxNzY0MTY4MTA1fQ.24r9qBs4HF1ukNsHPF-dNPiDyRiAl4btMC8Pt1OD1Ww
 
 ### Create a new product
 
-POST http://{{host}}/api/products
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzYzMTYyOTMyLCJleHAiOjE3NjMxNjY1MzJ9.h1_KHCGxaik-4uGN5rpgVSbzOn1Os63S-PBviL02wpo
+POST http://{{host}}/api/products/create
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InF4eE1oMTFVdXJUZGdlbzlOd0hxIiwiZW1haWwiOiJtZUB4LmNvbSIsImlhdCI6MTc2NDE2NDUwNSwiZXhwIjoxNzY0MTY4MTA1fQ.24r9qBs4HF1ukNsHPF-dNPiDyRiAl4btMC8Pt1OD1Ww
 
 {
-    "name": "test",
-    "price": 36
+    "name": "Pantalon",
+    "price": 8000,
+    "categories": [ "Ropa", "Mujer" ]
 }
 
 ### Login
@@ -27,6 +42,15 @@ Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOi
 POST http://{{host}}/auth/login
 
 {
-    "email": "user@example.com",
-    "password": "hahaha123"
+    "email": "me@x.com",
+    "password": "test123"
+}
+
+### Register
+
+POST http://{{host}}/auth/register
+
+{
+    "email": "me@x.com",
+    "password": "test123"
 }
