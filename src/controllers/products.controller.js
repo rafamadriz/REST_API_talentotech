@@ -1,20 +1,20 @@
-import productsModel from '../models/products.model.js'
+import productsService from '../services/products.service.js'
 
 export const getAllProducts = async (req, res) => {
-    productsModel.getAllProducts().then(value => {
+    productsService.getAllProducts().then(value => {
         res.status(200).send(value)
     })
 }
 
 export const getProductById = async (req, res) => {
     const id = req.params.id
-    const product = productsModel.getProductById(id)
+    const product = productsService.getProductById(id)
     product
-        .then(value => {
-            if (value) {
-                res.status(200).json(value)
+        .then(data => {
+            if (data) {
+                res.status(200).json({ id: id, ...data })
             } else {
-                res.status(400).send("Product not find")
+                res.status(400).send(`Product not found with ID: ${id}`)
             }
         })
         .catch(error => console.error(error.message))
@@ -23,8 +23,25 @@ export const getProductById = async (req, res) => {
 export const saveProduct = async (req, res) => {
     const name = req.body.name
     const price = req.body.price
-    productsModel.saveProduct({name, price}).then(async docRef => {
-        const pro = await productsModel.getProductById(docRef.id)
-        res.status(200).json(pro)
-    })
+    const categories = req.body.categories
+    productsService.saveProduct({ name, price, categories }).then(async docRef => {
+        const productData = await productsService.getProductById(docRef.id)
+        res.status(200).json({ id: docRef.id, ...productData })
+    }).catch(error => {
+            res.startus(500).send(error)
+        })
+}
+
+export const deleteProduct = async (req, res) => {
+    const id = req.params.id
+    const product = productsService.deleteProduct(id)
+    product
+        .then(data => {
+            if (data) {
+                res.status(200).json({ id: id, ...data })
+            } else {
+                res.status(400).send(`Product not found with ID: ${id}`)
+            }
+        })
+        .catch(error => console.error(error.message))
 }

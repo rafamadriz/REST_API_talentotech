@@ -1,37 +1,13 @@
-const products = [
-    {
-        id: 1,
-        name: "Remera",
-        price: 500,
-    },
-    {
-        id: 2,
-        name: "Pantalon",
-        price: 1500,
-    }
-]
+import productsModel from "../models/products.model.js"
 
-const getAllProducts = () => {
-    return products
-}
-
-const getProductById = (id) => {
-    return products.find(product => product.id === parseInt(id))
-}
-
-const createProduct = (product) => {
-    const newProduct = {
-        id: products.length + 1,
-        name: product.name,
-        price: product.price,
-    }
-    products.push(newProduct)
-
-    return newProduct
-}
+const getAllProducts = productsModel.getAllProducts
+const getProductById = productsModel.getProductById
+const saveProduct    = productsModel.saveProduct
+const deleteProduct  = productsModel.deleteProduct
 
 export default {
-    getAllProducts,
     getProductById,
-    createProduct
+    getAllProducts,
+    saveProduct,
+    deleteProduct
 }

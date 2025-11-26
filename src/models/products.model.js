@@ -1,4 +1,4 @@
-import { db } from '../data.js'
+import { db } from './data.js'
 import {
     collection,
     getDocs,
@@ -11,43 +11,51 @@ import {
 const productsCollection = collection(db, 'products')
 
 async function getProductById(id) {
-    const productDoc = await getDoc(doc(productsCollection, id))
-    if (productDoc.exists()) {
-        return productDoc.data()
-    } else {
-        return null
+    try {
+        const productDoc = await getDoc(doc(productsCollection, id))
+        if (productDoc.exists()) {
+            return productDoc.data()
+        } else {
+            return null
+        }
+    } catch (error) {
+        console.error(error)
     }
 }
 
 async function getAllProducts() {
-    const querySnapshot = await getDocs(productsCollection)
-    const products = []
-    querySnapshot.forEach((doc) => {
-        products.push({ id: doc.id, ...doc.data() })
-    })
+    try {
+        const querySnapshot = await getDocs(productsCollection)
+        const products = []
+        querySnapshot.forEach((doc) => {
+            products.push({ id: doc.id, ...doc.data() })
+        })
 
-    return products
+        return products
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-async function saveProduct(product) {
-    return await addDoc(productsCollection, product)
+async function saveProduct(data) {
+    try {
+        return await addDoc(productsCollection, data)
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-async function deleteProduct(product) {
-    await deleteDoc(doc(productsCollection, product.id))
+async function deleteProduct(id) {
+    try {
+        const productToDelete = await getDoc(doc(productsCollection, id))
+        if (productToDelete.exists()) {
+            await deleteDoc(doc(productsCollection, productToDelete.id))
+            return productToDelete.data()
+        } else return null
+    } catch (error) {
+        console.error(error)
+    }
 }
-
-const deleteTests = () => {
-    getAllProducts().then(async products => {
-        for (const product of products) {
-            if (product.name === "test" && product.id) {
-                deleteProduct(product)
-            }
-        }
-    })
-}
-
-// deleteTests()
 
 export default {
     getProductById,
