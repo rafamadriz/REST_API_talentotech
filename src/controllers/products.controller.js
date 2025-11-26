@@ -1,14 +1,14 @@
-import productsService from '../services/products.service.js'
+import productsModel from '../models/products.model.js'
 
 export const getAllProducts = async (req, res) => {
-    productsService.getAllProducts().then(value => {
+    productsModel.getAllProducts().then(value => {
         res.status(200).send(value)
     })
 }
 
 export const getProductById = async (req, res) => {
     const id = req.params.id
-    const product = productsService.getProductById(id)
+    const product = productsModel.getProductById(id)
     product
         .then(data => {
             if (data) {
@@ -24,8 +24,8 @@ export const saveProduct = async (req, res) => {
     const name = req.body.name
     const price = req.body.price
     const categories = req.body.categories
-    productsService.saveProduct({ name, price, categories }).then(async docRef => {
-        const productData = await productsService.getProductById(docRef.id)
+    productsModel.saveProduct({ name, price, categories }).then(async docRef => {
+        const productData = await productsModel.getProductById(docRef.id)
         res.status(200).json({ id: docRef.id, ...productData })
     }).catch(error => {
             res.startus(500).send(error)
@@ -34,7 +34,7 @@ export const saveProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
     const id = req.params.id
-    const product = productsService.deleteProduct(id)
+    const product = productsModel.deleteProduct(id)
     product
         .then(data => {
             if (data) {
