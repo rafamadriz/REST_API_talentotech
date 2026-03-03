@@ -1,148 +1,77 @@
-# Api Rest en Node.js
+# Api Rest in Node.js
 
-## Description
+## Usage
 
-API REST for product management made with NODE.js and Express.
+### Registration
 
-## Instalación
+```http
+POST https://rest-api-talentotech.vercel.app/auth/register
 
-1. Clone repo
-2. Install dependencies
-
-```bash
-npm install
+{
+    "email": "your@email.com",
+    "password": "mypasswd"
+}
 ```
 
-3. Setup env variables with corresponding values in `.env`
+### Login
 
-4. Run in dev mode
+```http
+POST https://rest-api-talentotech.vercel.app/auth/login
 
-```bash
-npm run dev
+{
+    "email": "your@email.com",
+    "password": "mypasswd"
+}
 ```
 
-## API Docs
+You will get a response with a token which you will need as authorization for other requests.
 
-### Get all products
-
-- **GET** `/products`
-- **Descripción:** Returns a list of all products
-- Example response:
-
-```json
-[
-  { "id": "l8F0WCBBUc1Q7jxYmdu9", "categories": [ "Ropa", "Hombre" ], "name": "Camiseta"", price": 5200, },
-  { "id": "lWaqp4iUuYPi6SCspuvG", "categories": [ "Ropa", "Mujer" ], "name": "Pantalon", "price": 8000 }
-]
-```
-
-<!-- ### Buscar productos por nombre -->
-<!---->
-<!-- - **GET** `/products/search?name=palabra` -->
-<!-- - **Descripción:** Devuelve los productos cuyo nombre contiene la palabra indicada. -->
-<!-- - **Parámetros:** -->
-<!--   - `name` (query, requerido): texto a buscar en el nombre del producto. -->
-<!-- - **Ejemplo de uso:** `/products/search?name=camiseta` -->
-<!-- - **Respuesta ejemplo:** -->
-<!---->
-<!-- ```json -->
-<!-- [{ "id": 1, "name": "Camiseta Deportiva", "price": 150 }] -->
-<!-- ``` -->
-
-### Get product by ID
-
-- **GET** `/products/:id`
-- **Descripción:** Returns specific product by ID
-- **Parámetros:**
-  - `id` (path, required): product ID.
-- **Ejemplo de uso:** `/products/l8F0WCBBUc1Q7jxYmdu9`
-- **Respuesta ejemplo:**
-
-```json
-{ "id": "l8F0WCBBUc1Q7jxYmdu9", "categories": [ "Ropa", "Hombre" ], "name": "Camiseta"", price": 5200, },
-```
+E.g `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InF4eE1oMTFVdXJUZGdlbzlOd0hxIiwiZW1haWwiOiJtZUB4LmNvbSIsImlhdCI6MTc2NDE2NDUwNSwiZXhwIjoxNzY0MTY4MTA1fQ.24r9qBs4HF1ukNsHPF-dNPiDyRiAl4btMC8Pt1OD1Ww`
 
 ### Create a product
 
-- **POST** `/products`
-- **Descripción:** Create a new product.
-- **Body (JSON):**
+```http
+POST https://rest-api-talentotech.vercel.app/api/products/create
+Authorization: Basic <YOUR_TOKEN>
 
-```json
-{ "name": "Nuevo Producto", "price": 999 }
+{
+    "name": "Pantalon",
+    "price": 8000,
+    "categories": [ "Ropa", "Mujer" ]
+}
 ```
 
-- **Respuesta ejemplo:**
+Response:
 
 ```json
-{ "id": 6, "name": "Nuevo Producto", "price": 999 }
+{
+    "id": "lWaqp4iUuYPi6SCspuvG",
+    "price": 8000,
+    "name": "Pantalon",
+    "categories": [
+        "Ropa",
+        "Mujer"
+    ]
+}
 ```
 
-<!-- ### Actualizar un producto (PUT) -->
-<!---->
-<!-- - **PUT** `/products/:id` -->
-<!-- - **Descripción:** Actualiza completamente un producto existente. -->
-<!-- - **Parámetros:** -->
-<!--   - `id` (path, requerido): ID del producto a actualizar. -->
-<!-- - **Body (JSON):** -->
-<!---->
-<!-- ```json -->
-<!-- { "name": "Producto Actualizado", "price": 500 } -->
-<!-- ``` -->
-<!---->
-<!-- - **Respuesta ejemplo:** -->
-<!---->
-<!-- ```json -->
-<!-- { "id": 1, "name": "Producto Actualizado", "price": 500 } -->
-<!-- ``` -->
+### Get Product by ID
 
-<!-- ### Actualizar parcialmente un producto (PATCH) -->
-<!---->
-<!-- - **PATCH** `/products/:id` -->
-<!-- - **Descripción:** Actualiza parcialmente un producto existente. -->
-<!-- - **Parámetros:** -->
-<!--   - `id` (path, requerido): ID del producto a actualizar. -->
-<!-- - **Body (JSON):** Solo los campos que se desean actualizar -->
-<!---->
-<!-- ```json -->
-<!-- { "price": 600 } -->
-<!-- ``` -->
-<!---->
-<!-- - **Respuesta ejemplo:** -->
-<!---->
-<!-- ```json -->
-<!-- { "id": 1, "name": "Camiseta Deportiva", "price": 600 } -->
-<!-- ``` -->
-<!---->
+```http
+GET https://rest-api-talentotech.vercel.app/api/products/lWaqp4iUuYPi6SCspuvG
+Authorization: Basic <YOUR_TOKEN>
+```
+
 ### Delete product by ID
 
-- **DELETE** `/products/:id`
-- **Descripción:** Delete product by ID.
-- **Parámetros:**
-  - `id` (path, requerido): product ID to delete.
+```http
+DELETE https://rest-api-talentotech.vercel.app/api/products/lWaqp4iUuYPi6SCspuvG
+Authorization: Basic <YOUR_TOKEN>
+```
 
-<!-- ## Códigos de estado -->
-<!---->
-<!-- - `200` - OK: Operación exitosa -->
-<!-- - `201` - Created: Recurso creado exitosamente -->
-<!-- - `204` - No Content: Recurso eliminado exitosamente -->
-<!-- - `400` - Bad Request: Datos de entrada inválidos -->
-<!-- - `404` - Not Found: Recurso no encontrado -->
+### Get all products 
 
-<!-- ## Estructura del proyecto -->
-<!---->
-<!-- ``` -->
-<!-- src/ -->
-<!-- ├── Controllers/ -->
-<!-- │   └── products.controller.js -->
-<!-- ├── Models/ -->
-<!-- │   └── Product.js -->
-<!-- └── Routes/ -->
-<!-- └── products.router.js -->
-<!-- ``` -->
-<!---->
-<!-- ## Tecnologías utilizadas -->
-<!---->
-<!-- - Node.js -->
-<!-- - Express.js -->
-<!-- - ES6 Modules -->
+```http
+GET https://rest-api-talentotech.vercel.app/api/products
+Authorization: Basic <YOUR_TOKEN>
+```
